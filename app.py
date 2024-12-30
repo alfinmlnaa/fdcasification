@@ -18,7 +18,11 @@ def load_scaler():
 
 # Streamlit app
 def main():
-    st.title("SVM Classification App")
+    st.markdown(
+    """
+    <h1 style="text-align: center;">SVM Classification App</h1>
+    """, 
+    unsafe_allow_html=True)
     st.write("This app classifies financial data into distress or non-distress categories using an SVM model optimized with PSO.")
 
     # Sidebar for navigation
@@ -50,18 +54,34 @@ def main():
         # Input fields for features
         col1, col2, col3 = st.columns(3)
         with col1:
-            npl = st.number_input("NPL", min_value=0.0, format="%.4f")
-            roa = st.number_input("ROA", min_value=0.0, format="%.4f")
-            roe = st.number_input("ROE", min_value=0.0, format="%.4f")
+            npl = st.text_input("NPL", value="")
+            roa = st.text_input("ROA", value="")
+            roe = st.text_input("ROE", value="")
         with col2:
-            nim = st.number_input("NIM", min_value=0.0, format="%.4f")
-            bopo = st.number_input("BOPO", min_value=0.0, format="%.4f")
-            cir = st.number_input("CIR", min_value=0.0, format="%.4f")
+            nim = st.text_input("NIM", value="")
+            bopo = st.text_input("BOPO", value="")
+            cir = st.text_input("CIR", value="")
         with col3:
-            ldr = st.number_input("LDR", min_value=0.0, format="%.4f")
-            car = st.number_input("CAR", min_value=0.0, format="%.4f")
-            cr = st.number_input("CR", min_value=0.0, format="%.4f")
-            cta = st.number_input("CTA", min_value=0.0, format="%.4f")
+            ldr = st.text_input("LDR", value="")
+            car = st.text_input("CAR", value="")
+            cr = st.text_input("CR", value="")
+            cta = st.text_input("CTA", value="")
+
+        # Validating inputs
+        try:
+            # Convert inputs to floats if they are not empty
+            npl = float(npl) if npl else None
+            roa = float(roa) if roa else None
+            roe = float(roe) if roe else None
+            nim = float(nim) if nim else None
+            bopo = float(bopo) if bopo else None
+            cir = float(cir) if cir else None
+            ldr = float(ldr) if ldr else None
+            car = float(car) if car else None
+            cr = float(cr) if cr else None
+            cta = float(cta) if cta else None
+        except ValueError:
+            st.error("Please enter valid numbers for all fields.")
 
         # Collect data in a DataFrame
         input_data = pd.DataFrame(
@@ -73,10 +93,6 @@ def main():
         try:
             # Ensure the input data is scaled using the loaded scaler
             input_data_scaled = scaler.transform(input_data)
-
-            # Display original and scaled data
-            st.write(f"Original Input Data: {input_data}")
-            st.write(f"Scaled Input Data: {input_data_scaled}")
 
             # Set a fixed threshold of 0.3
             threshold = 0.3
