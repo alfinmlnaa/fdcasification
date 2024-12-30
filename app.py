@@ -32,7 +32,17 @@ def main():
     if choice == "Home":
         st.subheader("Welcome to the SVM Classification App!")
         st.write("Navigate to the 'Classify' menu to test the model with your own data.")
-
+        
+        # Adding instructions on how to use the app
+        st.markdown("### How to Use:")
+        st.write("""
+        1. Navigate to the **Classify** menu from the sidebar.
+        2. Input the financial indicators (e.g., NPL, ROA, ROE, etc.) in the provided fields.
+        3. Click the **Classify** button to predict whether the data indicates 'Distress' or 'Non-Distress'.
+        4. View the prediction results along with the probabilities for each class.
+        5. If you encounter any issues, refer to the 'About' section for more information.
+        """)
+        
     elif choice == "Classify":
         st.subheader("Classify Data")
         st.write("Enter financial indicators below for classification:")
@@ -83,11 +93,6 @@ def main():
 
                 # Display prediction and probability
                 st.write(f"Prediction: **{'Distress' if prediction == 1 else 'Non-Distress'}**")
-                st.write(f"Distress Probability: {prediction_prob[0][1]:.4f}")
-                st.write(f"Non-Distress Probability: {prediction_prob[0][0]:.4f}")
-
-                # Debugging: Check raw output
-                st.write(f"Raw Prediction Probabilities: {prediction_prob}")
 
         except Exception as e:
             st.error(f"Error: {e}")
@@ -95,6 +100,6 @@ def main():
     elif choice == "About":
         st.subheader("About")
         st.write("This app was created to classify financial institutions based on key financial indicators using an SVM model optimized with PSO.")
-
+        st.write("For Further Information Contact maulanaalfin882@gmail.com")
 if __name__ == "__main__":
     main()
