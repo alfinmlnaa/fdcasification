@@ -120,7 +120,7 @@ def main():
 
         with col1:
             # Display the photo
-            st.image("profile.jpg", caption="Muhammad Alfin Maulana", width=150)  # Adjust the width as needed
+            st.image("profile.jpg", caption="Muhammad Alfin Maulana", width=220)  # Adjust the width as needed
 
         with col2:
             # Display the biodata
