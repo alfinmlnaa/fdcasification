@@ -114,8 +114,24 @@ def main():
             st.error(f"Error: {e}")
 
     elif choice == "About":
-        st.subheader("About")
-        st.write("This app was created to classify financial institutions based on key financial indicators using an SVM model optimized with PSO.")
-        st.write("For Further Information Contact maulanaalfin882@gmail.com")
+        st.markdown("""<h2 style="text-align: center;">Developer Information</h2>""", unsafe_allow_html=True)
+        # Layout for photo and biodata
+        col1, col2 = st.columns([1, 2])
+
+        with col1:
+            # Display the photo
+            st.image("profile.jpg", caption="Muhammad Alfin Maulana", width=150)  # Adjust the width as needed
+
+        with col2:
+            # Display the biodata
+            st.markdown("""
+            **Nama:** Muhammad Alfin Maulana  
+            **NRP:** 2043211026  
+            **Jurusan:** Statistika Bisnis  
+            **Institusi:** Institut Teknologi Sepuluh Nopember  
+            **No. Telp.:** +62 858 5528 4037  
+            **Email:** maulanaalfin882@gmail.com  
+            """)
+
 if __name__ == "__main__":
     main()
