@@ -120,7 +120,7 @@ def main():
             st.error(f"Error: {e}")
 
     elif choice == "Profil Pembuat":
-        st.markdown("""<h2 style="text-align: center;">Developer Information</h2>""", unsafe_allow_html=True)
+        st.markdown("""<h2 style="text-align: center;">Profil Pembuat</h2>""", unsafe_allow_html=True)
         # Layout for photo and biodata
         col1, col2 = st.columns([1, 2])
 
