@@ -29,7 +29,7 @@ def main():
     scaler = load_scaler()
 
     if choice == "Home":
-        st.subheader("Selamat datang di Dashboard Analisis Prediksi Financial Distress!")
+        st.subheader("Selamat datang di Dashboard Analisis Prediksi Financial Distress Bank di Indonesia!")
         
         # Adding instructions on how to use the app
         st.markdown("### Cara Penggunaan:")
