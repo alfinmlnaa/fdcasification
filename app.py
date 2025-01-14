@@ -30,7 +30,16 @@ def main():
 
     if choice == "Home":
         st.subheader("Selamat datang di Dashboard Analisis Prediksi Financial Distress!")
-
+        
+        # Adding instructions on how to use the app
+        st.markdown("### Cara Penggunaan:")
+        st.write("""
+        1. Buka menu Klasifikasi dari bilah sisi.
+        2. Masukkan indikator keuangan (misalnya, NPL, ROA, ROE, dll.) pada kolom yang disediakan.
+        3. Klik tombol Klasifikasi untuk memprediksi apakah data menunjukkan 'Distress' atau 'Non-Distress'.
+        4. Lihat hasil prediksi.
+        5. Jika Anda mengalami masalah atau kendala, lihat bagian 'Profil Pembuat' untuk informasi lebih lanjut.
+        """)
     elif choice == "Deskripsi Variabel":
         st.subheader("Penjelasan Variabel")
         st.write("### Non-Performing Loan (NPL)")
