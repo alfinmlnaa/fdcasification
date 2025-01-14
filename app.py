@@ -34,8 +34,8 @@ def main():
         # Adding instructions on how to use the app
         st.markdown("### Cara Penggunaan:")
         st.write("""
-        1. Buka menu Klasifikasi dari bilah sisi.
-        2. Masukkan indikator keuangan (misalnya, NPL, ROA, ROE, dll.) pada kolom yang disediakan.
+        1. Buka menu 'Prediksi' dari bilah sisi.
+        2. Masukkan indikator keuangan (misalnya, NPL, ROA, ROE, dll.) pada kolom yang disediakan dan pastikan semua indikator terisi.
         3. Klik tombol Klasifikasi untuk memprediksi apakah data menunjukkan 'Distress' atau 'Non-Distress'.
         4. Lihat hasil prediksi.
         5. Jika Anda mengalami masalah atau kendala, lihat bagian 'Profil Pembuat' untuk informasi lebih lanjut.
