@@ -120,7 +120,7 @@ def main():
             # Predict button
             if st.button("Classify"):
                 # Make prediction using the SVM model
-                prediction_prob = svm_model.predict_proba(input_data_scaled)
+                prediction_prob = best_svm_pso_model.predict_proba(input_data_scaled)
                 # Compare the probability of distress (class 1) with the threshold
                 if prediction_prob[0][1] >= threshold:
                     prediction = 1  # Distress
