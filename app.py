@@ -18,11 +18,10 @@ def load_scaler():
 
 # Streamlit app
 def main():
-    st.title("SVM Classification App")
-    st.write("This app classifies financial data into distress or non-distress categories using an SVM model optimized with PSO.")
+    st.title("Prediksi Financial Distress Bank Umum di Indonesia")
 
     # Sidebar for navigation
-    menu = ["Home","Deskripsi Variabel", "Classify", "About"]
+    menu = ["Home","Deskripsi Variabel", "Prediksi", "Profil Pembuat"]
     choice = st.sidebar.selectbox("Menu", menu)
 
     # Load the model and scaler
@@ -30,8 +29,7 @@ def main():
     scaler = load_scaler()
 
     if choice == "Home":
-        st.subheader("Welcome to the SVM Classification App!")
-        st.write("Navigate to the 'Classify' menu to test the model with your own data.")
+        st.subheader("Selamat datang di Dashboard Analisis Prediksi Financial Distress!")
 
     elif choice == "Deskripsi Variabel":
         st.subheader("Penjelasan Variabel")
@@ -62,9 +60,9 @@ def main():
         st.write("### Current Ratio (CR)")
         st.write("Current Ratio (CR) digunakan dalam mengukur kemampuan bank untuk memenuhi kewajiban jangka pendeknya yang akan jatuh tempo dengan menggunakan total aset lancar yang ada. CR menggambarkan jumlah ketersediaan aset lancar yang dimiliki dibandingkan dengan total kewajiban lancar.")
     
-    elif choice == "Classify":
-        st.subheader("Classify Data")
-        st.write("Enter financial indicators below for classification:")
+    elif choice == "Prediksi":
+        st.subheader("Data Prediksi")
+        st.write("Masukkan Indikator untuk Prediksi:")
 
         # Input fields for features
         col1, col2, col3 = st.columns(3)
@@ -121,9 +119,25 @@ def main():
         except Exception as e:
             st.error(f"Error: {e}")
 
-    elif choice == "About":
-        st.subheader("About")
-        st.write("This app was created to classify financial institutions based on key financial indicators using an SVM model optimized with PSO.")
+    elif choice == "Profil Pembuat":
+        st.markdown("""<h2 style="text-align: center;">Developer Information</h2>""", unsafe_allow_html=True)
+        # Layout for photo and biodata
+        col1, col2 = st.columns([1, 2])
+
+        with col1:
+            # Display the photo
+            st.image("profile.jpg", caption="Muhammad Alfin Maulana", width=220)  # Adjust the width as needed
+
+        with col2:
+            # Display the biodata
+            st.markdown("""
+            **Nama:** Muhammad Alfin Maulana  
+            **NRP:** 2043211026  
+            **Jurusan:** Statistika Bisnis  
+            **Institusi:** Institut Teknologi Sepuluh Nopember  
+            **No. Telp.:** +62 858 5528 4037  
+            **Email:** maulanaalfin882@gmail.com  
+            """)
 
 if __name__ == "__main__":
     main()
