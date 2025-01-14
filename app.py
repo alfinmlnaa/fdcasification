@@ -7,7 +7,7 @@ from sklearn.svm import SVC  # Ensure SVC is imported if required
 # Load the trained model
 @st.cache_resource
 def load_model():
-    model = load('svm_model.joblib')  # Load the trained SVM model
+    model = load('best_svm_pso_model.joblib')  # Load the trained SVM model
     return model
 
 # Load the saved scaler
