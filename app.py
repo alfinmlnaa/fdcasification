@@ -25,7 +25,7 @@ def main():
     choice = st.sidebar.selectbox("Menu", menu)
 
     # Load the model and scaler
-    svm_model = load_model()
+    best_svm_pso_model = load_model()
     scaler = load_scaler()
 
     if choice == "Home":
