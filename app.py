@@ -18,15 +18,11 @@ def load_scaler():
 
 # Streamlit app
 def main():
-    st.markdown(
-    """
-    <h1 style="text-align: center;">SVM Classification App</h1>
-    """, 
-    unsafe_allow_html=True)
+    st.title("SVM Classification App")
     st.write("This app classifies financial data into distress or non-distress categories using an SVM model optimized with PSO.")
 
     # Sidebar for navigation
-    menu = ["Home", "Classify", "About"]
+    menu = ["Home","Deskripsi Variabel", "Classify", "About"]
     choice = st.sidebar.selectbox("Menu", menu)
 
     # Load the model and scaler
@@ -36,17 +32,36 @@ def main():
     if choice == "Home":
         st.subheader("Welcome to the SVM Classification App!")
         st.write("Navigate to the 'Classify' menu to test the model with your own data.")
-        
-        # Adding instructions on how to use the app
-        st.markdown("### How to Use:")
-        st.write("""
-        1. Navigate to the **Classify** menu from the sidebar.
-        2. Input the financial indicators (e.g., NPL, ROA, ROE, etc.) in the provided fields.
-        3. Click the **Classify** button to predict whether the data indicates 'Distress' or 'Non-Distress'.
-        4. View the prediction results along with the probabilities for each class.
-        5. If you encounter any issues, refer to the 'About' section for more information.
-        """)
-        
+
+    elif choice == "Deskripsi Variabel":
+        st.subheader("Penjelasan Variabel")
+        st.write("### Non-Performing Loan (NPL)")
+        st.write("NPL  merupakan rasio keuangan yang menunjukkan risiko kredit yang dihadapi akibat pemberian kredit dan investasi dana pada portofolio yang berbeda. NPL digunakan untuk menilai potensi kesulitan bank untuk menagih piutangnya yang dapat membahayakan operasional bisnis bank.")
+
+        st.write("### Return on Asset (ROA)")
+        st.write("ROA merupakan rasio yang digunakan untuk mengukur seberapa besar jumlah laba bersih yang akan dihasilkan dari setiap rupiah dana yang tertanam dalam total aktiva. ROA merupakan sebuah alat yang memiliki fungsi untuk menilai kemampuan aset bank dalam mendapatkan keuntungan.")
+
+        st.write("### Return on Equity (ROE)")
+        st.write("ROE adalah rasio yang menunjukkan daya bank untuk menghasilkan laba atas ekuitas yang diinvestasikan para pemegang saham.")
+
+        st.write("### Net Interest Margin (NIM)")
+        st.write("NIM dihitung dengan cara membandingkan antara pendapatan bunga bersih terhadap rata-rata aktiva produktif, kegunaan rasio ini adalah untuk mengetahui kesanggupan manajemen bank dalam mengelola aset produktifnya untuk memperoleh pendapatan bunga bersih. Semakin tinggi NIM sebuah bank maka semakin efektif bank dalam menempatkan aktiva produktif untuk mendorong peningkatan laba.")
+
+        st.write("### Beban Operasi terhadap Pendapatan Operasi (BOPO)")
+        st.write("Beban Operasi terhadap Pendapatan Operasi (BOPO adalah rasio efisiensi bank yang mengukur beban operasi terhadap pendapatan operasional, semakin besar nilai BOPO menandakan semakin kurang efisien dalam menjalankan operasional bank.")
+
+        st.write("### Cost to Income Ratio (CIR)")
+        st.write("CIR merupakan rasio perbandingan antara biaya dengan pendapatan total. CIR adalah gambaran dari profitabilitas bank, karena melalui CIR dapat diketahui bank tersebut menjalankan usahanya secara efisien atau tidak.")
+
+        st.write("### Loan to Deposit Ratio (LDR)")
+        st.write("LDR digunakan untuk mengetahui tingkat likuiditas dari sebuah bank, LDR yang tinggi menandakan semakin besar jumlah dana yang dialirkan kepada debitur daripada ke deposito ataupun tabungan masyarakat.")
+
+        st.write("### Capital Adequacy Ratio (CAR)")
+        st.write("CAR atau biasa disebut rasio kecukupan modal menggambarkan rasio kecukupan modal bank yang diperoleh dengan cara membagi total modal dengan aset tertimbang menurut risiko (ATMR).")
+
+        st.write("### Current Ratio (CR)")
+        st.write("Current Ratio (CR) digunakan dalam mengukur kemampuan bank untuk memenuhi kewajiban jangka pendeknya yang akan jatuh tempo dengan menggunakan total aset lancar yang ada. CR menggambarkan jumlah ketersediaan aset lancar yang dimiliki dibandingkan dengan total kewajiban lancar.")
+    
     elif choice == "Classify":
         st.subheader("Classify Data")
         st.write("Enter financial indicators below for classification:")
@@ -54,34 +69,18 @@ def main():
         # Input fields for features
         col1, col2, col3 = st.columns(3)
         with col1:
-            npl = st.text_input("NPL", value="")
-            roa = st.text_input("ROA", value="")
-            roe = st.text_input("ROE", value="")
+            npl = st.number_input("NPL", min_value=0.0, format="%.4f")
+            roa = st.number_input("ROA", min_value=0.0, format="%.4f")
+            roe = st.number_input("ROE", min_value=0.0, format="%.4f")
         with col2:
-            nim = st.text_input("NIM", value="")
-            bopo = st.text_input("BOPO", value="")
-            cir = st.text_input("CIR", value="")
+            nim = st.number_input("NIM", min_value=0.0, format="%.4f")
+            bopo = st.number_input("BOPO", min_value=0.0, format="%.4f")
+            cir = st.number_input("CIR", min_value=0.0, format="%.4f")
         with col3:
-            ldr = st.text_input("LDR", value="")
-            car = st.text_input("CAR", value="")
-            cr = st.text_input("CR", value="")
-            cta = st.text_input("CTA", value="")
-
-        # Validating inputs
-        try:
-            # Convert inputs to floats if they are not empty
-            npl = float(npl) if npl else None
-            roa = float(roa) if roa else None
-            roe = float(roe) if roe else None
-            nim = float(nim) if nim else None
-            bopo = float(bopo) if bopo else None
-            cir = float(cir) if cir else None
-            ldr = float(ldr) if ldr else None
-            car = float(car) if car else None
-            cr = float(cr) if cr else None
-            cta = float(cta) if cta else None
-        except ValueError:
-            st.error("Please enter valid numbers for all fields.")
+            ldr = st.number_input("LDR", min_value=0.0, format="%.4f")
+            car = st.number_input("CAR", min_value=0.0, format="%.4f")
+            cr = st.number_input("CR", min_value=0.0, format="%.4f")
+            cta = st.number_input("CTA", min_value=0.0, format="%.4f")
 
         # Collect data in a DataFrame
         input_data = pd.DataFrame(
@@ -94,8 +93,12 @@ def main():
             # Ensure the input data is scaled using the loaded scaler
             input_data_scaled = scaler.transform(input_data)
 
-            # Set a fixed threshold of 0.3
-            threshold = 0.3
+            # Display original and scaled data
+            st.write(f"Original Input Data: {input_data}")
+            st.write(f"Scaled Input Data: {input_data_scaled}")
+
+            # Add a slider to adjust the threshold (default set to 0.5)
+            threshold = st.slider("Set Threshold for Classification", 0.0, 1.0, 0.5, 0.01)
 
             # Predict button
             if st.button("Classify"):
@@ -109,29 +112,18 @@ def main():
 
                 # Display prediction and probability
                 st.write(f"Prediction: **{'Distress' if prediction == 1 else 'Non-Distress'}**")
+                st.write(f"Distress Probability: {prediction_prob[0][1]:.4f}")
+                st.write(f"Non-Distress Probability: {prediction_prob[0][0]:.4f}")
+
+                # Debugging: Check raw output
+                st.write(f"Raw Prediction Probabilities: {prediction_prob}")
 
         except Exception as e:
             st.error(f"Error: {e}")
 
     elif choice == "About":
-        st.markdown("""<h2 style="text-align: center;">Developer Information</h2>""", unsafe_allow_html=True)
-        # Layout for photo and biodata
-        col1, col2 = st.columns([1, 2])
-
-        with col1:
-            # Display the photo
-            st.image("profile.jpg", caption="Muhammad Alfin Maulana", width=220)  # Adjust the width as needed
-
-        with col2:
-            # Display the biodata
-            st.markdown("""
-            **Nama:** Muhammad Alfin Maulana  
-            **NRP:** 2043211026  
-            **Jurusan:** Statistika Bisnis  
-            **Institusi:** Institut Teknologi Sepuluh Nopember  
-            **No. Telp.:** +62 858 5528 4037  
-            **Email:** maulanaalfin882@gmail.com  
-            """)
+        st.subheader("About")
+        st.write("This app was created to classify financial institutions based on key financial indicators using an SVM model optimized with PSO.")
 
 if __name__ == "__main__":
     main()
