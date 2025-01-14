@@ -35,7 +35,7 @@ def main():
         st.markdown("### Cara Penggunaan:")
         st.write("""
         1. Buka menu 'Prediksi' dari bilah sisi.
-        2. Masukkan indikator keuangan (misalnya, NPL, ROA, ROE, dll.) pada kolom yang disediakan dan pastikan semua indikator terisi.
+        2. Masukkan indikator keuangan (misalnya NPL, ROE, NIM, dll.) pada kolom yang disediakan dan pastikan semua indikator terisi.
         3. Klik tombol Klasifikasi untuk memprediksi apakah data menunjukkan 'Distress' atau 'Non-Distress'.
         4. Lihat hasil prediksi.
         5. Jika Anda mengalami masalah atau kendala, lihat bagian 'Profil Pembuat' untuk informasi lebih lanjut.
@@ -44,9 +44,6 @@ def main():
         st.subheader("Penjelasan Variabel")
         st.write("### Non-Performing Loan (NPL)")
         st.write("NPL  merupakan rasio keuangan yang menunjukkan risiko kredit yang dihadapi akibat pemberian kredit dan investasi dana pada portofolio yang berbeda. NPL digunakan untuk menilai potensi kesulitan bank untuk menagih piutangnya yang dapat membahayakan operasional bisnis bank.")
-
-        st.write("### Return on Asset (ROA)")
-        st.write("ROA merupakan rasio yang digunakan untuk mengukur seberapa besar jumlah laba bersih yang akan dihasilkan dari setiap rupiah dana yang tertanam dalam total aktiva. ROA merupakan sebuah alat yang memiliki fungsi untuk menilai kemampuan aset bank dalam mendapatkan keuntungan.")
 
         st.write("### Return on Equity (ROE)")
         st.write("ROE adalah rasio yang menunjukkan daya bank untuk menghasilkan laba atas ekuitas yang diinvestasikan para pemegang saham.")
@@ -66,9 +63,12 @@ def main():
         st.write("### Capital Adequacy Ratio (CAR)")
         st.write("CAR atau biasa disebut rasio kecukupan modal menggambarkan rasio kecukupan modal bank yang diperoleh dengan cara membagi total modal dengan aset tertimbang menurut risiko (ATMR).")
 
-        st.write("### Current Ratio (CR)")
-        st.write("Current Ratio (CR) digunakan dalam mengukur kemampuan bank untuk memenuhi kewajiban jangka pendeknya yang akan jatuh tempo dengan menggunakan total aset lancar yang ada. CR menggambarkan jumlah ketersediaan aset lancar yang dimiliki dibandingkan dengan total kewajiban lancar.")
-    
+        st.write("### Cash to Total Assets (CTA)")
+        st.write("Cash to Total Assets (CTA) digunakan untuk menggambarkan rasio kecukupan modal bank yang diperoleh dengan cara membagi total modal dengan aset tertimbang menurut risiko (ATMR)")
+
+        st.write("### Giro Wajib Minimum (GWM)")
+        st.write("GWM adalah dana atau simpanan minimum yang harus dipelihara bank dalam bentuk saldo rekening giro yang ditempatkan di Bank Indonesia. Sebagai simpanan minimum yang sifatnya wajib, besaran persentase tertentu dari dana phak ketiga yang dihimpun oleh bank umum.")
+        
     elif choice == "Prediksi":
         st.subheader("Data Prediksi")
         st.write("Masukkan Indikator untuk Prediksi:")
@@ -77,38 +77,36 @@ def main():
         col1, col2, col3 = st.columns(3)
         with col1:
             npl = st.text_input("NPL", value="")
-            roa = st.text_input("ROA", value="")
             roe = st.text_input("ROE", value="")
-        with col2:
             nim = st.text_input("NIM", value="")
+        with col2:
             bopo = st.text_input("BOPO", value="")
             cir = st.text_input("CIR", value="")
-        with col3:
             ldr = st.text_input("LDR", value="")
+        with col3:
             car = st.text_input("CAR", value="")
-            cr = st.text_input("CR", value="")
             cta = st.text_input("CTA", value="")
+            gwm = st.text_input("GWM", value="")
 
         # Validating inputs
         try:
             # Convert inputs to floats if they are not empty
             npl = float(npl) if npl else None
-            roa = float(roa) if roa else None
             roe = float(roe) if roe else None
             nim = float(nim) if nim else None
             bopo = float(bopo) if bopo else None
             cir = float(cir) if cir else None
             ldr = float(ldr) if ldr else None
             car = float(car) if car else None
-            cr = float(cr) if cr else None
             cta = float(cta) if cta else None
+            gwm = float(gwm) if gwm else None
         except ValueError:
             st.error("Please enter valid numbers for all fields.")
 
         # Collect data in a DataFrame
         input_data = pd.DataFrame(
-            [[npl, roa, roe, nim, bopo, cir, ldr, car, cr, cta]],
-            columns=["NPL", "ROA", "ROE", "NIM", "BOPO", "CIR", "LDR", "CAR", "CR", "CTA"]
+            [[npl, roe, nim, bopo, cir, ldr, car, cta, gwm]],
+            columns=["NPL", "ROE", "NIM", "BOPO", "CIR", "LDR", "CAR", "CTA", "GWM"]
         )
 
         # Normalize the input data
